@@ -10,7 +10,7 @@ PATH_FLAGS = --prefix=/usr
 CONF_FLAGS = --enable-static --disable-shared --with-pic
 CFLAGS = -static -static-libgcc -Wl,-static -lc -I$(DEP_DIR)/usr/include
 
-PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/v//')
+PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/linnftnl-//')
 PATCH_VERSION = $$(cat version)
 VERSION = $(PACKAGE_VERSION)-$(PATCH_VERSION)
 
