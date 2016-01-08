@@ -12,9 +12,9 @@ PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/v//')
 PATCH_VERSION = $$(cat version)
 VERSION = $(PACKAGE_VERSION)-$(PATCH_VERSION)
 
-LIBMNL_VERSION = 1.0.3-1
+LIBMNL_VERSION = 1.0.3-2
 LIBMNL_URL = https://github.com/amylum/libmnl/releases/download/$(LIBMNL_VERSION)/libmnl.tar.gz
-LIBMNL_TAR = /tmp/libgpgerror.tar.gz
+LIBMNL_TAR = /tmp/libmnl.tar.gz
 LIBMNL_DIR = /tmp/libmnl
 LIBMNL_PATH = -I$(LIBMNL_DIR)/usr/include -L$(LIBMNL_DIR)/usr/lib
 
