@@ -1,12 +1,14 @@
 PACKAGE = libnftnl
 ORG = amylum
 
+DEP_DIR = /tmp/dep-dir
+
 BUILD_DIR = /tmp/$(PACKAGE)-build
 RELEASE_DIR = /tmp/$(PACKAGE)-release
 RELEASE_FILE = /tmp/$(PACKAGE).tar.gz
 PATH_FLAGS = --prefix=/usr
 CONF_FLAGS = --enable-static --disable-shared --with-pic
-CFLAGS = -static -static-libgcc -Wl,-static -lc
+CFLAGS = -static -static-libgcc -Wl,-static -lc -I$(DEP_DIR)/usr/include
 
 PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/v//')
 PATCH_VERSION = $$(cat version)
@@ -32,6 +34,8 @@ container:
 	./meta/launch
 
 deps:
+	mkdir -p $(DEP_DIR)/usr/include/
+	cp -R /usr/include/{linux,asm,asm-generic} $(DEP_DIR)/usr/include/
 	rm -rf $(LIBMNL_DIR) $(LIBMNL_TAR)
 	mkdir $(LIBMNL_DIR)
 	curl -sLo $(LIBMNL_TAR) $(LIBMNL_URL)
@@ -41,7 +45,7 @@ build: submodule deps
 	rm -rf $(BUILD_DIR) $(DEP_DIR)
 	cp -R upstream $(BUILD_DIR)
 	cd $(BUILD_DIR) && ./autogen.sh
-	cd $(BUILD_DIR) && CC=musl-gcc CFLAGS='$(CFLAGS) $(LIBMNL_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
+	cd $(BUILD_DIR) && CC=musl-gcc CFLAGS='$(CFLAGS)' LIBMNL_LIBS=-lmnl LIBMNL_CFLAGS='$(LIBMNL_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
 	cd $(BUILD_DIR) && make && make DESTDIR=$(RELEASE_DIR) install
 	mkdir -p $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)
 	cp $(BUILD_DIR)/COPYING $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)/LICENSE
