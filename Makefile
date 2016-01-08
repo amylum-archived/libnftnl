@@ -18,7 +18,7 @@ LIBMNL_TAR = /tmp/libgpgerror.tar.gz
 LIBMNL_DIR = /tmp/libmnl
 LIBMNL_PATH = -I$(LIBMNL_DIR)/usr/include -L$(LIBMNL_DIR)/usr/lib
 
-.PHONY : default submodule manual container build version push local
+.PHONY : default submodule deps manual container build version push local
 
 default: submodule container
 
@@ -31,7 +31,13 @@ manual: submodule
 container:
 	./meta/launch
 
-build: submodule
+deps:
+	rm -rf $(LIBMNL_DIR) $(LIBMNL_TAR)
+	mkdir $(LIBMNL_DIR)
+	curl -sLo $(LIBMNL_TAR) $(LIBMNL_URL)
+	tar -x -C $(LIBMNL_DIR) -f $(LIBMNL_TAR)
+
+build: submodule deps
 	rm -rf $(BUILD_DIR) $(DEP_DIR)
 	cp -R upstream $(BUILD_DIR)
 	cd $(BUILD_DIR) && ./autogen.sh
