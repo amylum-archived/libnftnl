@@ -42,7 +42,7 @@ deps:
 	tar -x -C $(LIBMNL_DIR) -f $(LIBMNL_TAR)
 
 build: submodule deps
-	rm -rf $(BUILD_DIR) $(DEP_DIR)
+	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
 	cd $(BUILD_DIR) && ./autogen.sh
 	cd $(BUILD_DIR) && CC=musl-gcc CFLAGS='$(CFLAGS)' LIBMNL_LIBS=-lmnl LIBMNL_CFLAGS='$(LIBMNL_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
