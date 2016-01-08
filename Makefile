@@ -12,6 +12,12 @@ PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/v//')
 PATCH_VERSION = $$(cat version)
 VERSION = $(PACKAGE_VERSION)-$(PATCH_VERSION)
 
+LIBMNL_VERSION = 1.0.3-1
+LIBMNL_URL = https://github.com/amylum/libmnl/releases/download/$(LIBMNL_VERSION)/libmnl.tar.gz
+LIBMNL_TAR = /tmp/libgpgerror.tar.gz
+LIBMNL_DIR = /tmp/libmnl
+LIBMNL_PATH = -I$(LIBMNL_DIR)/usr/include -L$(LIBMNL_DIR)/usr/lib
+
 .PHONY : default submodule manual container build version push local
 
 default: submodule container
@@ -29,7 +35,7 @@ build: submodule
 	rm -rf $(BUILD_DIR) $(DEP_DIR)
 	cp -R upstream $(BUILD_DIR)
 	cd $(BUILD_DIR) && ./autogen.sh
-	cd $(BUILD_DIR) && CC=musl-gcc CFLAGS='$(CFLAGS)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
+	cd $(BUILD_DIR) && CC=musl-gcc CFLAGS='$(CFLAGS) $(LIBMNL_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
 	cd $(BUILD_DIR) && make && make DESTDIR=$(RELEASE_DIR) install
 	mkdir -p $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)
 	cp $(BUILD_DIR)/COPYING $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)/LICENSE
