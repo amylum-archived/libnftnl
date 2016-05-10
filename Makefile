@@ -45,7 +45,7 @@ build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
 	cd $(BUILD_DIR) && ./autogen.sh
-	cd $(BUILD_DIR) && CC=musl-gcc CFLAGS='$(CFLAGS)' LIBMNL_LIBS=-lmnl LIBMNL_CFLAGS='$(LIBMNL_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
+	cd $(BUILD_DIR) && CC=musl-gcc CFLAGS='$(CFLAGS) $(LIBMNL_PATH)' LDFLAGS='$(LIBMNL_PATH)' LIBMNL_CFLAGS='$(LIBMNL_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
 	cd $(BUILD_DIR) && make && make DESTDIR=$(RELEASE_DIR) install
 	mkdir -p $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)
 	cp $(BUILD_DIR)/COPYING $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)/LICENSE
