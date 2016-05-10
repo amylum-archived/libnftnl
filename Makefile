@@ -7,14 +7,14 @@ BUILD_DIR = /tmp/$(PACKAGE)-build
 RELEASE_DIR = /tmp/$(PACKAGE)-release
 RELEASE_FILE = /tmp/$(PACKAGE).tar.gz
 PATH_FLAGS = --prefix=/usr
-CONF_FLAGS = --enable-static --disable-shared --with-pic
-CFLAGS = -static -static-libgcc -Wl,-static -lc -I$(DEP_DIR)/usr/include
+CONF_FLAGS = --with-pic
+CFLAGS = -I$(DEP_DIR)/usr/include
 
 PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/libnftnl-//')
 PATCH_VERSION = $$(cat version)
 VERSION = $(PACKAGE_VERSION)-$(PATCH_VERSION)
 
-LIBMNL_VERSION = 1.0.3-2
+LIBMNL_VERSION = 1.0.3-3
 LIBMNL_URL = https://github.com/amylum/libmnl/releases/download/$(LIBMNL_VERSION)/libmnl.tar.gz
 LIBMNL_TAR = /tmp/libmnl.tar.gz
 LIBMNL_DIR = /tmp/libmnl
