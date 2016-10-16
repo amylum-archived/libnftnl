@@ -1,0 +1,27 @@
+name 'libnftnl'
+org 'amylum'
+
+licenses 'COPYING'
+
+deps(
+  libmnl: '1.0.4-4',
+  'linux-api-headers': '4.8-rc6-2'
+)
+
+configure_flags(
+  prefix: '/usr'
+)
+
+cflags
+harden
+
+build do
+  run './autogen.sh'
+  configure
+  make
+  install
+end
+
+test do
+  # TODO: add tests
+end
