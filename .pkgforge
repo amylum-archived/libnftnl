@@ -4,8 +4,8 @@ org 'amylum'
 licenses 'COPYING'
 
 deps(
-  libmnl: '1.0.4-4',
-  'linux-api-headers': '4.8-rc6-2'
+  libmnl: '1.0.4-5',
+  'linux-api-headers': '4.9-rc3-2'
 )
 
 configure_flags(
