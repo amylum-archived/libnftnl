@@ -5,8 +5,8 @@ licenses 'COPYING'
 
 deps(
   libmnl: {
-    version: '1.0.4-19',
-    checksum: 'c9e1ef506f99fcd0796a8e0b1bc8ad0af9ab6b117019bd4dd4d35fc7c3e2167b'
+    version: '1.0.4-20',
+    checksum: '98a4c42a79f8dee98d45de0e34a8a76c73f118377df1c7c10911bb1858f2fc07'
   },
   'linux-api-headers': {
     version: '4.16-1',
