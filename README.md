@@ -1,7 +1,7 @@
 libnftnl
 ==========
 
-[![Build Status](https://img.shields.io/circleci/project/amylum/libnftnl/master.svg)](https://circleci.com/gh/amylum/libnftnl)
+[![Build Status](https://img.shields.io/travis/com/amylum/libnftnl.svg)](https://travis-ci.com/amylum/libnftnl)
 [![GitHub release](https://img.shields.io/github/release/amylum/libnftnl.svg)](https://github.com/amylum/libnftnl/releases)
 [![GPL2 Licensed](http://img.shields.io/badge/license-GPL2+-green.svg)](https://tldrlegal.com/license/gnu-general-public-license-v2)
 
