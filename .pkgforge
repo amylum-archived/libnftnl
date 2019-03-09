@@ -5,12 +5,12 @@ licenses 'COPYING'
 
 deps(
   libmnl: {
-    version: '1.0.4-25',
-    checksum: 'b923bb247733a67b32ca0000f551a76d90132cf2f4192744b9a07b4a7218a766'
+    version: '1.0.4-26',
+    checksum: '3749c1571b4e80434f1ce1cfd078ebb757aa2bef6e485b507e6bb3e7a9221b91'
   },
   'linux-api-headers': {
-    version: '4.20-1',
-    checksum: 'aed037b2b3fb2df77ca19359a20188d39c25d011febf4d3733d251fa87ca9636'
+    version: '5.0-1',
+    checksum: '0703e1a5406fea7aa0072034e815fc2b3188151732ec61b134b0e54aa3e752ab'
   }
 )
 
